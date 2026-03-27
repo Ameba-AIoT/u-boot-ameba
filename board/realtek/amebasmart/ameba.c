@@ -65,6 +65,8 @@ int syscfg_get_secure_enable(void)
 	}
 }
 
+EXPORT_SYMBOL(syscfg_get_secure_enable);
+
 static int syscfg_get_otp_boot_select(void)
 {
 	u32 reg = REG32(OTPC_REG_BASE + SEC_OTP_SYSCFG0);

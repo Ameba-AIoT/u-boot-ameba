@@ -76,6 +76,8 @@ DEFINE_ALIGN_BUFFER(uint8_t, status_buffer_addr, DWC2_STATUS_BUF_SIZE,
 static struct dwc2_priv local;
 #endif
 
+extern int rtk_phy_read(struct phy *p, uintptr_t dwc, u8 addr, u8 *val);
+extern int rtk_phy_write(struct phy *p, uintptr_t dwc, u8 addr, u8 val);
 /*
  * DWC2 IP interface
  */
@@ -319,7 +321,7 @@ static void dwc_otg_core_host_init(struct udevice *dev,
 	ret = rtk_phy_calibrate(&priv->phy, (uintptr_t)regs);
 	if (ret) {
 		pr_err("[USBH] PHY calibration fail\n");
-		return ret;
+		return;
 	}
 #endif
 

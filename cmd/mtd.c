@@ -25,6 +25,8 @@
 
 #define MISC_OPTION_CMD_SIZE	8 // max:(recovery, normal)
 
+extern int syscfg_get_secure_enable(void);
+
 static struct mtd_info *get_mtd_by_name(const char *name)
 {
 	struct mtd_info *mtd;
@@ -639,12 +641,12 @@ static int do_mtd_io_option(
 		argv_read[2] = argv[2];		// DDR address.
 		argv_read[3] = "0";			// Start byte in mtd block
 		argv_read[4] = argv[6];		// Image size.
-		do_mtd_io(NULL, NULL, 5, argv_read);
+		do_mtd_io(NULL, 0, 5, argv_read);
 		argv_read[1] = "r-dtb";
 		argv_read[2] = argv[3];
 		argv_read[3] = "0";
 		argv_read[4] = argv[7];
-		do_mtd_io(NULL, NULL, 5, argv_read);
+		do_mtd_io(NULL, 0, 5, argv_read);
 #if IS_ENABLED(CONFIG_VERIFIED_BOOT)
 		argv_read[1] = argv[2];		// DDR kernel address
 		argv_read[2] = argv[3];		// DDR dtb address
@@ -665,12 +667,12 @@ static int do_mtd_io_option(
 		argv_read[2] = argv[3];
 		argv_read[3] = "0";
 		argv_read[4] = argv[5];
-		do_mtd_io(NULL, NULL, 5, argv_read);
+		do_mtd_io(NULL, 0, 5, argv_read);
 		argv_read[1] = "uImage";
 		argv_read[2] = argv[2];
 		argv_read[3] = "0";
 		argv_read[4] = argv[4];
-		do_mtd_io(NULL, NULL, 5, argv_read);
+		do_mtd_io(NULL, 0, 5, argv_read);
 #if IS_ENABLED(CONFIG_VERIFIED_BOOT)
 		argv_read[1] = argv[2];		// DDR kernel address
 		argv_read[2] = argv[3];		// DDR dtb address
